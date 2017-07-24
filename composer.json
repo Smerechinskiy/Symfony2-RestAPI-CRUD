@@ -16,7 +16,9 @@
         "php": ">=5.3.9",
         "doctrine/doctrine-bundle": "~1.4",
         "doctrine/orm": "^2.4.8",
+        "friendsofsymfony/rest-bundle": "@stable",
         "incenteev/composer-parameter-handler": "~2.0",
+        "jms/serializer-bundle": "@stable",
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "symfony/monolog-bundle": "^3.0.2",
@@ -25,6 +27,8 @@
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^2.3",
+        "doctrine/doctrine-migrations-bundle": "^1.2",
         "sensio/generator-bundle": "~3.0",
         "symfony/phpunit-bridge": "~2.7"
     },
@@ -47,7 +51,7 @@
     "config": {
         "bin-dir": "bin",
         "platform": {
-            "php": "5.3.9"
+            "php": "5.6"
         },
         "sort-packages": true
     },
