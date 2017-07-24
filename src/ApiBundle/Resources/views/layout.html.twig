@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}RestAPI{% endblock %}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="keywords" content="{% block keywords %}{% endblock %}"/>
+        <meta name="description" content="{% block description %}{% endblock %}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, , user-scalable=no">
+        {% block stylesheets %}
+            {# #}
+        {% endblock %}
+        {% block javascripts %}
+            {# #}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="col-sm-9 col-md-10 affix-content">
+            <div class="container">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+
+        {% block customScripts %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,4 @@
+api_page:
+    path: /
+    defaults: { _controller: ApiBundle:Annotation:index }
+
