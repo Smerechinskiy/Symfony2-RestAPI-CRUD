@@ -1,4 +1,4 @@
 api_page:
     path: /
-    defaults: { _controller: ApiBundle:Annotation:index }
+    defaults: { _controller: ApiBundle:Car:index }
 

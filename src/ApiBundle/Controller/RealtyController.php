@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class AnnotationController extends Controller
+class RealtyController extends Controller
 {
     /**
      * @Route("/")
      */
     public function indexAction()
     {
-        return $this->render('ApiBundle:Annotation:index.html.twig');
+        return $this->render('ApiBundle:Car:index.html.twig');
     }
 }
