@@ -10,37 +10,37 @@ namespace ApiBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use ApiBundle\Entity\Realty;
+use ApiBundle\Entity\Property;
 
 class LoadFixtures extends AbstractFixture
 {
     public function load(ObjectManager $manager)
     {
-        $this->loadRealty($manager);
+        $this->loadProperty($manager);
     }
 
-    public function loadRealty($manager)
+    public function loadProperty($manager)
     {
-        $realty = new Realty();
-        $realty->setType('Квартира');
-        $realty->setRoom(2);
-        $realty->setPrice(20000);
-        $realty->setDescription('Отличная квартира в новострое (центр города)');
-        $manager->persist($realty);
+        $property = new Property();
+        $property->setType('Квартира');
+        $property->setRoom(2);
+        $property->setPrice(20000);
+        $property->setDescription('Отличная квартира в новострое (центр города)');
+        $manager->persist($property);
 
-        $realty = new Realty();
-        $realty->setType('Коттедж');
-        $realty->setRoom(10);
-        $realty->setPrice(300000);
-        $realty->setDescription('Коттедж в живописном месте у реки');
-        $manager->persist($realty);
+        $property = new Property();
+        $property->setType('Коттедж');
+        $property->setRoom(10);
+        $property->setPrice(300000);
+        $property->setDescription('Коттедж в живописном месте у реки');
+        $manager->persist($property);
 
-        $realty = new Realty();
-        $realty->setType('Дача');
-        $realty->setRoom(1);
-        $realty->setPrice(1500);
-        $realty->setDescription('Уютная дача с беседкой и мангалом в придачу');
-        $manager->persist($realty);
+        $property = new Property();
+        $property->setType('Дача');
+        $property->setRoom(1);
+        $property->setPrice(1500);
+        $property->setDescription('Уютная дача с беседкой и мангалом в придачу');
+        $manager->persist($property);
 
         $manager->flush();
     }

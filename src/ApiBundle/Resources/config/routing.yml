@@ -1,4 +1,4 @@
-api_page:
+property_page:
     path: /
-    defaults: { _controller: ApiBundle:Car:index }
+    defaults: { _controller: ApiBundle:Properties:index }
 

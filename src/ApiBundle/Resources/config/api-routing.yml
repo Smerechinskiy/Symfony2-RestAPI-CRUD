@@ -1,0 +1,5 @@
+api_property:
+    name_prefix:  api_property_
+    type: rest
+    resource: "@ApiBundle/Controller/ApiPropertiesController.php"
+

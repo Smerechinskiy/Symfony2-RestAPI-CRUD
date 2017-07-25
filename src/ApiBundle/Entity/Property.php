@@ -13,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="realty")
+ * @ORM\Table(name="properties")
  */
-class Realty
+class Property
 {
     /**
      * @var integer $id
@@ -70,7 +70,7 @@ class Realty
      *
      * @param string $type
      *
-     * @return Realty
+     * @return Property
      */
     public function setType($type)
     {
@@ -94,7 +94,7 @@ class Realty
      *
      * @param string $room
      *
-     * @return Realty
+     * @return Property
      */
     public function setRoom($room)
     {
@@ -118,7 +118,7 @@ class Realty
      *
      * @param string $price
      *
-     * @return Realty
+     * @return Property
      */
     public function setPrice($price)
     {
@@ -142,7 +142,7 @@ class Realty
      *
      * @param string $description
      *
-     * @return Realty
+     * @return Property
      */
     public function setDescription($description)
     {
