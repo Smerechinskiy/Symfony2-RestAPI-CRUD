@@ -1,0 +1,17 @@
+{% extends "ApiBundle::layout.html.twig" %}
+
+{% block content %}
+    <h3>Редактирование объявления</h3>
+    <div class="well clearfix">
+        {{ form_start(form) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.room) }}
+        {{ form_row(form.price) }}
+        {{ form_row(form.description) }}
+        <span>
+            {{ form_row(form.button) }}
+        </span>
+        {{ form_row(form._token) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

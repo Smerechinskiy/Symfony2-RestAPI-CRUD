@@ -1,6 +1,42 @@
 {% extends "ApiBundle::layout.html.twig" %}
 
 {% block content %}
-    <h3>Cписок</h3>
-    <p>Hello, World!</p>
+    {% if properties|length > 0 %}
+    <table class="table table-inverse">
+        <thead>
+            <tr class="white">
+                <th class="text-center">ID</th>
+                <th class="text-center">Тип недвижимости</th>
+                <th class="text-center">Кол-во комнат</th>
+                <th class="text-center">Стоимость</th>
+                <th class="text-center">Описание</th>
+                <th class="text-center" width="40"></th>
+                <th class="text-center" width="40"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for property in properties %}
+            <tr>
+                <td><b>{{ property.id }}</b></td>
+                <td>{{ property.type }}</td>
+                <td>{{ property.room }}</td>
+                <td>{{ property.price }}</td>
+                <td>{{ property.description }}</td>
+                <td align="right">
+                    <a class="edit" href="{{ path('property_edit',{'id': property.id}) }}" title="Редактировать объявление">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </a>
+                </td>
+                <td align="right">
+                    <a class="delete" href="{{ path('property_delete',{'id': property.id}) }}" title="Удалить объявление">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </a>
+                </td>
+            </tr>
+         {% endfor %}
+        </tbody>
+    </table>
+        {% else %}
+            <div class="alert alert-info">Cписок обьявлений пуст</div>
+        {% endif %}
 {% endblock %}

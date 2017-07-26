@@ -1,25 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>{% block title %}RestAPI{% endblock %}</title>
+        <title>{% block title %}Недвижимость{% endblock %}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="keywords" content="{% block keywords %}{% endblock %}"/>
         <meta name="description" content="{% block description %}{% endblock %}"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, , user-scalable=no">
         {% block stylesheets %}
-            {# #}
+            <link rel="stylesheet" href="{{ asset('bundles/api/css/bootstrap.min.css') }}" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('bundles/api/css/cover.css') }}" type="text/css" />
         {% endblock %}
         {% block javascripts %}
-            {# #}
-        {% endblock %}
+            <script src="{{ asset('bundles/api/js/jquery-2.2.4.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('bundles/api/js/bootstrap.min.js') }}" type="text/javascript"></script>
+                   {% endblock %}
     </head>
     <body>
-        <div class="col-sm-9 col-md-10 affix-content">
-            <div class="container">
-                {% block content %}{% endblock %}
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+                <div class="masthead clearfix">
+                    <div class="inner">
+                        <h3 class="masthead-brand">Property</h3>
+                        <ul class="nav masthead-nav">
+                            <li><a href="{{ path('property_page') }}">Home</a></li>
+                            <li><a href="{{ path('property_create') }}">Создать</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="inner cover">
+                    {% block content %}{% endblock %}
+                </div>
+                <div class="mastfoot">
+                    <div class="inner">
+                        <p>Template for <a href="http://getbootstrap.com">Bootstrap</a>.</p>
+                    </div>
+                </div>
             </div>
         </div>
-
-        {% block customScripts %}{% endblock %}
+    </div>
+    {% block customScripts %}{% endblock %}
     </body>
 </html>
