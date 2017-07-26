@@ -3,20 +3,27 @@
 namespace ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\BrowserKit\Request;
 
 class ApiPropertiesController extends FOSRestController
 {
        public function getPropertyAction($id)
     {
-        $property = $this
+        $propertyRepository = $this
             ->getDoctrine()
-            ->getRepository('ApiBundle:Property')
-            ->find($id);
+            ->getRepository('ApiBundle:Property');
 
-        if (is_null($property)) {
-            throw $this->createNotFoundException('No such property');
+        $property = NULL;
+        try {
+            $property = $propertyRepository->find($id);
+        } catch (\Exception $exception) {
+            $type = NULL;
         }
 
+        if (!$property) {
+            throw new NotFoundHttpException(sprintf('The property id=\'%s\' was not found.', $id));
+        }
         return $property;
     }
 

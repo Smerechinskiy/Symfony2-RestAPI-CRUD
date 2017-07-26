@@ -5,7 +5,6 @@ namespace ApiBundle\Controller;
 use ApiBundle\Entity\Property;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ApiBundle\Form\PropertyForm;
 use Symfony\Component\HttpFoundation\Request;
 
