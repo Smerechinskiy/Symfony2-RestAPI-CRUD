@@ -4,6 +4,7 @@ namespace ApiBundle\Controller;
 
 use ApiBundle\Entity\Property;
 use ApiBundle\Form\ApiPropertyForm;
+use Doctrine\DBAL\Schema\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +16,8 @@ class ApiPropertiesController extends FOSRestController
     /**
      * REST action which returns property by id.
      * Method: GET, url: /api/properties/{id}.{_format}
-     *
      * @param $id
-     * @return mixed
+     * @return null|object
      */
     public function getPropertyAction($id)
     {
@@ -41,8 +41,7 @@ class ApiPropertiesController extends FOSRestController
     /**
      * REST action which returns all properties.
      * Method: GET, url: /api/properties.{_format}
-     *
-     * @return mixed
+     * @return array
      */
     public function getPropertiesAction()
     {
@@ -55,11 +54,88 @@ class ApiPropertiesController extends FOSRestController
     }
 
     /**
+ * REST action update property all field.
+ * Method: PUT, url: /api/properties/{id}.{_format}
+ * Update existing property from the submitted data or create a new property.
+ * @param Request $request
+ * @param $id
+ * @return View|\FOS\RestBundle\View\View|\Symfony\Component\Form\Form
+ */
+    public function putPropertiesAction(Request $request, $id)
+    {
+        $propertyRepository = $this->getDoctrine()->getRepository('ApiBundle:Property');
+        $property = $propertyRepository->find($id);
+
+        if ($property === null) {
+            return new View(null, Response::HTTP_NOT_FOUND);
+        }
+
+        $form = $this->createForm(ApiPropertyForm::class, $property, [
+            'csrf_protection' => false,
+        ]);
+
+        $form->submit($request->request->all());
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $routeOptions = [
+            'id' => $property->getId(),
+            '_format' => $request->get('_format'),
+        ];
+
+        return $this->routeRedirectView('', $routeOptions, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * REST action update property  field.
+     * Method: PATCH, url: /api/properties/{id}.{_format}
+     * Update existing property from the submitted data or create a new property.
+     * @param Request $request
+     * @param $id
+     * @return View|\FOS\RestBundle\View\View|\Symfony\Component\Form\Form
+     */
+    public function patchPropertiesAction(Request $request, $id)
+    {
+        /**
+         * @var $property Property
+         */
+        $property = $this->getDoctrine()->getRepository('ApiBundle:Property')->find($id);
+
+        if ($property === null) {
+            return new View(null, Response::HTTP_NOT_FOUND);
+        }
+
+        $form = $this->createForm(ApiPropertyForm::class, $property, [
+            'csrf_protection' => false,
+        ]);
+
+        $form->submit($request->request->all(), false);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $routeOptions = [
+            'id' => $property->getId(),
+            '_format' => $request->get('_format'),
+        ];
+
+        return $this->routeRedirectView('', $routeOptions, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
      * REST action creates a new properties.
      * Method: POST, url: /api/properties
-     *
-     * @param Request $request the request object
-     * @return mixed
+     * @param Request $request
+     * @return \FOS\RestBundle\View\View|\Symfony\Component\Form\Form
      */
     public function postPropertyAction(Request $request)
     {
@@ -77,9 +153,7 @@ class ApiPropertiesController extends FOSRestController
          */
         $property = $form->getData();
 
-        $em = $this
-            ->getDoctrine()
-            ->getManager();
+        $em = $this->getDoctrine()->getManager();
 
         $em->persist($property);
         $em->flush();
@@ -95,19 +169,14 @@ class ApiPropertiesController extends FOSRestController
     /**
      * REST action which deletes property by id.
      * Method: DELETE, url: /api/properties/{id}.{_format}
-     *
      * @param $id
-     * @return mixed
+     * @return JsonResponse
      */
     public function deletePropertyAction($id)
     {
-        $em = $this
-            ->getDoctrine()
-            ->getManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $propertyRepository = $this
-            ->getDoctrine()
-            ->getRepository('ApiBundle:Property');
+        $propertyRepository = $this->getDoctrine()->getRepository('ApiBundle:Property');
         /** @var Property $type */
         $property = $propertyRepository->find($id);
 
