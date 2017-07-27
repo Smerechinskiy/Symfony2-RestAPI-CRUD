@@ -26,7 +26,6 @@ class ApiPropertyForm extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => 'ApiBundle\Entity\Property',
-                'csrf_protection' => false,
             ]
         );
     }
@@ -35,7 +34,7 @@ class ApiPropertyForm extends AbstractType
      * @return string
      */
     public function getName() {
-        return 'api_bundle_type';
+        return 'api_property';
     }
 
 }
