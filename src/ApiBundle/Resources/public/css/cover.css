@@ -93,7 +93,7 @@ body {
   border-bottom-color: #fff;
 }
 
-form {
+form, h3{
   color: #333333;
   text-shadow: none;
 }

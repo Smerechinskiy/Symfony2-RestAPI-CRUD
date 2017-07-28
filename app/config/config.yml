@@ -11,7 +11,7 @@ parameters:
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: ~
     secret: '%secret%'
     router:
         resource: '%kernel.root_dir%/config/routing.yml'
@@ -70,6 +70,7 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+# FOSRest Configuration
 fos_rest:
     param_fetcher_listener: true
     view:
@@ -93,3 +94,12 @@ fos_rest:
         json: true
     body_listener: true
     disable_csrf_role: ROLE_API
+
+# FOSUser Configuration
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: ApiBundle\Entity\User
+    from_email:
+            address: you@example.com
+            sender_name: You

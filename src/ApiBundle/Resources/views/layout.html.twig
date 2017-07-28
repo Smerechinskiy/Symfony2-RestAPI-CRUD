@@ -21,10 +21,12 @@
             <div class="cover-container">
                 <div class="masthead clearfix">
                     <div class="inner">
-                        <h3 class="masthead-brand">Property</h3>
+                        <h3><a class="masthead-brand" href="{{ path('property_page') }}" title="Property">Property</a></h3>
+                        {#<h3 class="masthead-brand">Property</h3>#}
                         <ul class="nav masthead-nav">
-                            <li><a href="{{ path('property_page') }}">Home</a></li>
-                            <li><a href="{{ path('property_create') }}">Создать</a></li>
+                            <li><a href="{{ path('property_create') }}">Создать объявление</a></li>
+                            <li><a href="{{ path('property_page') }}">Сайт</a></li>
+                            <li><a href="{{ path('fos_user_security_logout') }}"><i class="glyphicon glyphicon-user"></i>   Выход</a></li>
                         </ul>
                     </div>
                 </div>
