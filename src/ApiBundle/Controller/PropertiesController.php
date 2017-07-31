@@ -4,14 +4,13 @@ namespace ApiBundle\Controller;
 
 use ApiBundle\Entity\Property;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ApiBundle\Form\PropertyForm;
 use Symfony\Component\HttpFoundation\Request;
 
 class PropertiesController extends Controller
 {
     /**
-     * @Route("/")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
@@ -23,6 +22,10 @@ class PropertiesController extends Controller
         return $this->render('ApiBundle:Property:index.html.twig', $data);
     }
 
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public  function  deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -38,6 +41,11 @@ class PropertiesController extends Controller
         return $this->redirect($this->generateUrl('property_page'));
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public  function  formEditAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -66,6 +74,10 @@ class PropertiesController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function formCreateAction(Request $request)
     {
 

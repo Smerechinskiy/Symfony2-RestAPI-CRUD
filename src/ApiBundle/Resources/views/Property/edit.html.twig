@@ -1,7 +1,10 @@
 {% extends "ApiBundle::layout.html.twig" %}
 
 {% block content %}
-    <h3>Редактирование объявления</h3>
+    <div class="inner">
+        <a type="button" href="{{ path('property_page') }}" class="btn btn-success btn-sm" title="На главную"><i class="glyphicon glyphicon-arrow-left"></i></a>
+    </div>
+    <h3 style="color: #ffffff">Редактирование объявления</h3>
     <div class="well clearfix">
         {{ form_start(form) }}
         {{ form_row(form.type) }}
@@ -14,4 +17,5 @@
         {{ form_row(form._token) }}
         {{ form_end(form) }}
     </div>
+
 {% endblock %}

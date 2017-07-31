@@ -1,0 +1,36 @@
+{% extends "::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/api/css/bootstrap.min.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/api/css/cover.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/api/css/form-style.css') }}" type="text/css" />
+    {% endblock %}
+    <div class="main clearfix">
+        <h3>Вход</h3><br>
+        <form action="{{ path('fos_user_security_check') }}" method="POST" class="fos_user_login">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            {% if error %}
+                <span class="help-block">
+                    <ul class="list-unstyled">
+                        <li><span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.messageKey|trans(error.messageData, 'security') }}</li>
+                    </ul>
+                </span>
+            {% endif %}
+            <div class="form-group">
+                <input type="text" id="inputUsernameEmail" name="_username" value="{{ last_username }}" required="required" class="form-control" placeholder="Имя пользователя или email"/>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="inputPassword" name="_password" required="required" placeholder="Пароль"  />
+                <div class="checkbox" style="display: flex">
+                    <label>
+                        <input type="checkbox"> Запомнить </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn btn-success btn-lg"> Войти </button>
+
+        </form>
+    </div>
+{% endblock fos_user_content %}

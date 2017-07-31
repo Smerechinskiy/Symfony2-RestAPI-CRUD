@@ -3,7 +3,9 @@
 namespace ApiBundle\Controller;
 
 use ApiBundle\Entity\Property;
+use ApiBundle\Entity\User;
 use ApiBundle\Form\ApiPropertyForm;
+use ApiBundle\Security\Access;
 use Doctrine\DBAL\Schema\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -41,7 +43,7 @@ class ApiPropertiesController extends FOSRestController
     /**
      * REST action which returns all properties.
      * Method: GET, url: /api/properties.{_format}
-     * @return array
+     * @return array|View
      */
     public function getPropertiesAction()
     {
@@ -49,7 +51,13 @@ class ApiPropertiesController extends FOSRestController
             ->getDoctrine()
             ->getRepository('ApiBundle:Property')
             ->findAll();
-
+        $serializer = $this->container->get('serializer');
+        $response = $serializer->serialize($properties, 'json');
+        $request = Request::createFromGlobals();
+        $access = new Access();
+        $accessToken = $access->signRequest('GET', $request->headers->get('host') . $request->getPathInfo(), $response, time(), $this->getParameter('secret'));
+        $properties['X-AUTH-TOKEN'] = $accessToken;
+//        $properties['X-USER-ID'] = 2;
         return $properties;
     }
 
